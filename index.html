@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SignSpeak — Real-Time Sign Language Translator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">🤟</span>
+      <span class="logo-text">SignSpeak</span>
+    </div>
+    <div class="status-badge" id="statusBadge">
+      <span class="status-dot"></span>
+      <span id="statusText">Camera Off</span>
+    </div>
+  </header>
+
+  <main class="main-grid">
+
+    <!-- LEFT: Webcam Panel -->
+    <section class="panel panel--camera" aria-label="Webcam Feed">
+      <div class="panel-header">
+        <h2 class="panel-title">Live Feed</h2>
+        <span class="panel-tag">INPUT</span>
+      </div>
+      <div class="video-wrapper">
+        <video id="webcam" autoplay playsinline muted aria-label="Webcam stream"></video>
+        <div class="video-overlay" id="videoOverlay">
+          <div class="overlay-icon">📷</div>
+          <p class="overlay-text">Camera is off</p>
+        </div>
+        <div class="scan-line" id="scanLine"></div>
+        <div class="corner corner--tl"></div>
+        <div class="corner corner--tr"></div>
+        <div class="corner corner--bl"></div>
+        <div class="corner corner--br"></div>
+      </div>
+    </section>
+
+    <!-- RIGHT: Detection Panel -->
+    <section class="panel panel--output" aria-label="Detected Sign">
+      <div class="panel-header">
+        <h2 class="panel-title">Detected Sign</h2>
+        <span class="panel-tag">OUTPUT</span>
+      </div>
+      <div class="output-wrapper">
+        <div class="output-display" id="outputDisplay" aria-live="polite" aria-atomic="true">
+          <span class="output-placeholder" id="outputPlaceholder">—</span>
+          <span class="output-label" id="outputLabel"></span>
+        </div>
+        <div class="confidence-bar-wrapper" id="confidenceWrapper" aria-hidden="true">
+          <span class="confidence-text">Confidence</span>
+          <div class="confidence-bar">
+            <div class="confidence-fill" id="confidenceFill"></div>
+          </div>
+        </div>
+        <div class="history-log" id="historyLog" aria-label="Detection history">
+          <p class="history-title">History</p>
+          <div class="history-items" id="historyItems">
+            <span class="history-empty">No detections yet</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Controls -->
+  <footer class="controls" role="toolbar" aria-label="Camera controls">
+    <button class="btn btn--primary" id="btnStart" aria-label="Start camera">
+      <span class="btn-icon">▶</span> Start Camera
+    </button>
+    <button class="btn btn--danger" id="btnStop" disabled aria-label="Stop camera">
+      <span class="btn-icon">■</span> Stop Camera
+    </button>
+    <button class="btn btn--accent" id="btnPredict" disabled aria-label="Predict sign language">
+      <span class="btn-icon">⚡</span> Predict
+    </button>
+    <button class="btn btn--ghost" id="btnClear" aria-label="Clear output">
+      <span class="btn-icon">✕</span> Clear
+    </button>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
